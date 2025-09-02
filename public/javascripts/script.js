@@ -6,15 +6,15 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "Map data © <a href='https://www.openstreetmap.org/'>OSM</a>"
 }).addTo(map);
 
-const markers = {}; // multiple users ke liye markers store karenge
+const markers = {}; //
 
-// 🔹 Custom icon (no shadow)
+// 🔹 Custom icon 
 const customIcon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
   iconSize: [25, 41],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
-  shadowUrl: null // 👈 shadow hata diya
+  shadowUrl: null // 
 });
 
 // Geolocation tracking
@@ -24,7 +24,6 @@ if (navigator.geolocation) {
       const { latitude, longitude } = pos.coords;
       socket.emit("sendLocation", { latitude, longitude });
 
-      // Apni location par hi map center karo (sirf first time)
       if (!markers[socket.id]) {
         map.setView([latitude, longitude], 16);
       }
@@ -48,7 +47,7 @@ socket.on("receive-location", (data) => {
   }
 });
 
-// Jab user disconnect kare → marker remove kar do
+
 socket.on("user-disconnect", (id) => {
   if (markers[id]) {
     map.removeLayer(markers[id]);
